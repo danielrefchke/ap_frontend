@@ -85,6 +85,6 @@ export class SeccionesComponent
       const element = event.container.data[index];
       element.orden=index+1;
     }
-    this.sincro.sincr(event.container.data[event.currentIndex], 'spinnerDrop');
+    //this.sincro.sincr(event.container.data[event.currentIndex], 'spinnerDrop');
   }
 }

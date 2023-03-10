@@ -12,9 +12,11 @@
     </div>
 </div>
 <div class="row edtsocial" *ngFor="let user of listaUsers">
-    <div class="col">{{user.nombre}}</div>
+    <div *ngIf="!user.isDeleted" class="col">{{user.nombre}}</div>
+    <div *ngIf="user.isDeleted" class="col deleted">{{user.nombre}}</div>
     <div class="col">
-        <i class="minibtn fa fa-pencil fa-lg" aria-hidden="true" (click)="editUser(user)"></i>
-        <i class="minibtn fa fa-trash fa-lg" aria-hidden="true" (click)="deleteUser(user)"></i>
+        <i *ngIf="!user.isDeleted" class="minibtn fa fa-pencil fa-lg" aria-hidden="true" (click)="editUser(user)"></i>
+        <i *ngIf="!user.isDeleted" class="minibtn fa fa-trash fa-lg" aria-hidden="true" (click)="deleteUser(user)"></i>
+        <i *ngIf="user.isDeleted" class="minibtn fa fa-undo fa-lg" aria-hidden="true" (click)="undeleteUser(user)"></i>
     </div>
 </div>

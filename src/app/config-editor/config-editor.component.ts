@@ -69,13 +69,20 @@ export class ConfigEditorComponent extends Autenticated {
   }
 
   cancelData(): void {
+    this.sincro.userList.undoAll();
+    this.sincro.SocialMedialist.undoAll();
     this.modalRef?.hide();
   }
 
   saveData(): void {
-    this.modalRef?.hide();
-    if (this.formulario.get('password').value != '')
-      this.user.nombre = this.formulario.get('nombre').value;
+    //this.modalRef?.hide();
+    if (this.formulario.get('password').value != ''){
+      //this.user.nombre = this.formulario.get('nombre').value
+      this.user.password = this.formulario.get('password').value;
+    };
+
+    this.sincro.sincr(this.sincro.userList);
+    this.sincro.sincr(this.sincro.SocialMedialist);
 
   }
 }

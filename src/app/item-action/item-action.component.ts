@@ -47,6 +47,6 @@ export class ItemActionComponent extends Autenticated {
 
   public confirmaEliminar() {
     this.tmp = this.elemento;
-    this.sincro.sincr(this.elemento);
+    //this.sincro.sincr(this.elemento);
   }
 }

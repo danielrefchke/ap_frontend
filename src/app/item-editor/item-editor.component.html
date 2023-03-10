@@ -48,7 +48,7 @@
             </div>
             <div class="modal-footer">
 
-                <button *ngIf="elemento.isChanged()" type="button" class="btn btn-secondary" (click)="cancelData()">Deshacer</button>
+                <button *ngIf="elemento.isChanged" type="button" class="btn btn-secondary" (click)="cancelData()">Deshacer</button>
                 <button type="button" class="btn btn-secondary" (click)="modalRef?.hide();">Cancelar</button>
                 <button type="button" class="btn btn-primary" (click)="saveData()"
                     [disabled]="!formulario.valid">Guardar</button>

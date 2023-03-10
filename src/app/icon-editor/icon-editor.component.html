@@ -23,10 +23,12 @@
 <div>
     <div class="row edtsocial" *ngFor="let icon of socialMedia">
         <div class="col"><i class="fa fa-lg {{icon.cssclass}}"></i></div>
-        <div class="col">{{icon.nombre}}</div>
+        <div *ngIf="!icon.isDeleted" class="col">{{icon.nombre}}</div>
+        <div *ngIf="icon.isDeleted" class="col deleted">{{icon.nombre}}</div>
         <div class="col">
-            <i class="minibtn fa fa-pencil fa-lg" aria-hidden="true" (click)="editIcon(icon)"></i>
-            <i class="minibtn fa fa-trash fa-lg" aria-hidden="true" (click)="eliminarIcon(icon)"></i>
+            <i *ngIf="!icon.isDeleted" class="minibtn fa fa-pencil fa-lg" aria-hidden="true" (click)="editIcon(icon)"></i>
+            <i *ngIf="!icon.isDeleted"class="minibtn fa fa-trash fa-lg" aria-hidden="true" (click)="eliminarIcon(icon)"></i>
+            <i *ngIf="icon.isDeleted" class="minibtn fa fa-undo fa-lg" aria-hidden="true" (click)="deshacerEliminar(icon)"></i>
         </div>
     </div>
 </div>

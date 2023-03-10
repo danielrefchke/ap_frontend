@@ -1,28 +1,58 @@
+import { retry } from "rxjs";
 
 
-export class Model  {
+export class Model {
   prev: {};
   attr: {};
   idAttr: string;
-  isNew:boolean;
+  private _isNew: boolean;
+  private _isDeleted:boolean;
 
-  constructor(attr: {}, idAttr: string = 'id') {
+  constructor(attr: {}, idAttr: string = "id") {
     this.attr = attr;
     this.prev = {};
     this.idAttr = idAttr;
-    this.isNew=true;
+    this._isNew = true;
   }
 
-  loaded():void{
-    this.isNew= false;
+  loaded(): void {
+    this._isNew = false;
+    this.prev = {};
   }
 
-  toJson():string{
+  get isDeleted():boolean{
+    return this._isDeleted;
+  }
+
+  delete(){
+    this._isDeleted=true;
+  }
+
+  unDelete(){
+    this._isDeleted = false;
+  }
+
+  serialize(): {} {
+    return this.attr;
+  }
+
+  unserialize(attr: {}):void{
+    this.attr = attr;
+    this.prev = {};
+  };
+
+  toJson(): string {
     return JSON.stringify(this.attr);
   }
 
-  isChanged(): boolean {
+  public get isChanged(): boolean {
+    //console.log((Object.keys(this.prev).length > 0));
+    
     return Object.keys(this.prev).length > 0;
+  }
+
+  public get isNew():boolean{
+    return this._isNew;
   }
 
   revert() {
@@ -30,6 +60,7 @@ export class Model  {
       this.attr[field] = this.prev[field];
     }
     this.prev = {};
+    this._isDeleted = false;
   }
 
   confirm() {
@@ -49,10 +80,8 @@ export class Model  {
 
   change(field: string) {
     this.prev[field] = this.attr[field];
-    console.log(this.prev[field]);
+    //console.log(this.prev[field]);
   }
 
-  fetch(ctrl:any=null):void{
-
-  }
+  fetch(ctrl: any = null): void {}
 }

@@ -111,7 +111,7 @@ export class ItemEditorComponent extends Autenticated {
     this.elemento.descripcion = this.formulario.get('descripcion').value;
     this.elemento.classType = this.formulario.get('classType').value;
     this.elemento.contDinamico = this.formulario.get('contDinamico').value;
-    this.sinc.sincr(this.elemento);
+    //this.sinc.sincr(this.elemento);
 
     this.bus.change.emit(this.elemento);
   }

@@ -6,8 +6,8 @@ export class HttpController {
     this.baseUrl = baseUrl;
   }
 
-  public static setToken(tk:string){
-    HttpController.AUTH_TOKEN =tk;
+  public static setToken(tk: string) {
+    HttpController.AUTH_TOKEN = tk;
   }
 
   private static getDefaultHeaders(): any {
@@ -20,7 +20,7 @@ export class HttpController {
   public async get<T>(path: string): Promise<T> {
     const url = `${this.baseUrl}${path}`;
 
-    const response = await fetch(url,{
+    const response = await fetch(url, {
       method: "GET",
       headers: HttpController.getDefaultHeaders(),
     });
@@ -36,7 +36,7 @@ export class HttpController {
   public async post(path: string, data: any): Promise<any> {
     const url = `${this.baseUrl}${path}`;
     //console.log(url);
-    
+
     const response = await fetch(url, {
       method: "POST",
       headers: HttpController.getDefaultHeaders(),
@@ -51,7 +51,7 @@ export class HttpController {
   }
 
   public async put(url: string, data: any): Promise<any> {
-    const response = await fetch(`${this.baseUrl}/${url}`, {
+    const response = await fetch(`${this.baseUrl}${url}`, {
       method: "PUT",
       headers: HttpController.getDefaultHeaders(),
       body: JSON.stringify(data),
@@ -64,10 +64,11 @@ export class HttpController {
     return await response.json();
   }
 
-  public async delete(url: string): Promise<any> {
-    const response = await fetch(`${this.baseUrl}/${url}`, {
+  public async delete(url: string, data: any): Promise<any> {
+    const response = await fetch(`${this.baseUrl}${url}`, {
       method: "DELETE",
       headers: HttpController.getDefaultHeaders(),
+      body: JSON.stringify(data),
     });
 
     if (!response.ok) {

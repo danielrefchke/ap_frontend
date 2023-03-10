@@ -9,6 +9,7 @@ import { Seccion } from '../seccion';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AuthService } from '../auth.service';
 import { Autenticated } from '../autenticated';
+import { Collection } from '../collection';
 
 @Component({
   selector: 'app-header-editor',
@@ -20,7 +21,7 @@ export class HeaderEditorComponent extends Autenticated {
   @Input() elemento: Header;
   formulario: FormGroup;
 
-  socialMedia: Socialmedia[];
+  socialMedia: Collection<Socialmedia>;
 
   esocial: Socialmedia;
 
@@ -80,7 +81,8 @@ export class HeaderEditorComponent extends Autenticated {
     this.header.imgcred = this.formulario.get('imgcred').value;
     this.header.imgpersona = this.formulario.get('imgpersona').value;
     //this.modalRef.hide();
-    this.sincro.sincr(this.header);
+    this.sincro.sincr(this.sincro.headerList);
+    this.sincro.sincr(this.socialMedia);
   }
 
   get Nombre() {

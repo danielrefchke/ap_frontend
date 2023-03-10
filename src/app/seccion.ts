@@ -1,4 +1,5 @@
 import { Collection } from './collection';
+import { CONNECTIONS } from './constants';
 import { Elemento } from './elemento';
 import { Model } from './model';
 
@@ -7,10 +8,14 @@ export class Seccion extends Model {
 
   constructor(attr: {}, idAttr: string = '') {
     super(attr);
-    this.elementos = new Collection<Elemento>(Elemento,
-       `assets/json/seccion/${this.getValue('id')}.json`);
+    
+    this.elementos = new Collection<Elemento>(
+      Elemento,
+      `${CONNECTIONS.SECCIONES}/${this.getValue("id")}`
+    );
     if (attr["elementos"]){
       this.elementos.parse(attr["elementos"]);
+      delete attr["elementos"];
     }
   }
 

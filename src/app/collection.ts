@@ -23,7 +23,16 @@ export class Collection<T> extends Array<T> {
     return this._url;
   }
 
+  public undoAll():void{
+    this.forEach((elemento:any)=>{
+      elemento.revert();
+    })
+  }
+
   public parse(elems: any,ctrl:any=null): void {
+    if(this.length > 0){
+      this.splice(0,this.length);
+    }
     let self = this;
     elems.forEach((elem) => {
       const modelInstance = new self.model(elem);

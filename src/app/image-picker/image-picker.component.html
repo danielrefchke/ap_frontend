@@ -1,0 +1,14 @@
+<div class="img-picker-container form-control">
+    <ngx-spinner name="spinnerImage" bdColor="rgba(112,106,100,0.6)" size="medium" color="#312b1f" type="square-jelly-box"
+        [fullScreen]="false">
+    </ngx-spinner>
+    <div class="img-picker-images">
+        <div *ngFor="let imagen of imagenes" class="img-picker-img">
+            <picture>
+                <img *ngIf="cssSelccionada(imagen.url)" class="img-picker-seleccionada" src="{{imagen.url}}" alt="" >
+
+                <img *ngIf="!cssSelccionada(imagen.url)" src="{{imagen.url}}" alt="" (click)="imgSelected(imagen.url)">
+            </picture>
+        </div>
+    </div>
+</div>

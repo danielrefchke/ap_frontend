@@ -1,0 +1,93 @@
+<div *ngIf="isLogged" class="header-button">
+    <i class="fa fa-pencil-square fa-2x" aria-hidden="true" (click)="editHeader(modalheader)" data-bs-toggle="modal"
+        data-bs-target="#modalheader"></i>
+</div>
+
+
+<ng-template #modalheader > 
+    <form id="itemform" [formGroup]="formulario" onsubmit="return false;">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5">Editar Datos personales</h1>
+            <button type="button" class="btn-close" (click)="modalRef.hide()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" role="dialog" tabindex="-1">
+            <tabset>
+                <tab heading="Datos Personales">
+                    <div class="mb-3">
+                        <label for="nombrepersona" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombrepersona" formControlName="nombre" placeholder="">
+                        <div *ngIf="Nombre?.errors  && Nombre?.touched">
+                            <p *ngIf="Nombre?.hasError('required')" class="error-message bg-danger text-white">
+                                El Nombre es requerido.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="titulopersona" class="col-form-label">Titulo:</label>
+                        <input type="text" class="form-control" id="titulopersona" formControlName="titulo" placeholder="">
+                        <div *ngIf="Titulo?.errors  && Titulo?.touched">
+                            <p *ngIf="Titulo?.hasError('required')" class="error-message bg-danger text-white">
+                                El Titulo es requerido.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcionheader" class="col-form-label">Texto:</label>
+                    
+                        <angular-editor formControlName="descripcion" [config]="editorConfig" id="descripcionheader"></angular-editor>
+                        <div *ngIf="Descripcion?.errors  && Descripcion?.touched">
+                            <p *ngIf="Descripcion?.hasError('required')" class="error-message bg-danger text-white">
+                                La descripcion es requerida.
+                            </p>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Imágenes">
+                    <div class="mb-3">
+                        <label for="imgcreditos" class="col-form-label">Creditos fondo:</label>
+                        <input type="text" class="form-control" id="imgcreditos" formControlName="imgcred" placeholder="">
+                        <div *ngIf="imgcred?.errors  && imgcred?.touched">
+                            <p *ngIf="imgcred?.hasError('required')" class="error-message bg-danger text-white">
+                                Los creditos de la imagen son requeridos
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imgback" class="col-form-label">Fondo:</label>
+                        <app-image-picker id="imgback" formControlName="imgback"></app-image-picker>
+                        <div *ngIf="imgback?.errors  && imgback?.touched">
+                            <p *ngIf="imgback?.hasError('required')" class="error-message bg-danger text-white">
+                                La imagen de fondo es requerida
+                            </p>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imgpersona" class="col-form-label">Imagen de portada:</label>
+                        <app-image-picker id="imgpersona" formControlName="imgpersona"></app-image-picker>
+                        <div *ngIf="imgpersona?.errors  && imgpersona?.touched">
+                            <p *ngIf="imgpersona?.hasError('required')" class="error-message bg-danger text-white">
+                                La imagen de portada es requerida
+                            </p>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Redes Sociales">
+                    <app-social-editor></app-social-editor>
+                </tab>
+                <tab heading="Secciones">
+                    <app-seccion-editor></app-seccion-editor>
+                </tab>
+            </tabset>
+        <div>
+            <ngx-spinner name="spinnerEdit" bdColor="rgba(112,106,100,0.6)" size="medium" color="#312b1f"
+                type="square-jelly-box" [fullScreen]="false"></ngx-spinner>
+            </div>
+        </div>
+        <div class="modal-footer">
+
+            <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cancelar</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="saveData()"
+                [disabled]="!formulario.valid">Guardar</button>
+        </div>
+    </form>
+</ng-template>

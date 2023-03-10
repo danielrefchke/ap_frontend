@@ -1,0 +1,28 @@
+<div  class="element" *ngFor="let elemento of elementos" cdkDrag [cdkDragDisabled]="!isLogged">
+    <div [ngSwitch]="elemento.classType" class="{{elemento.classType}}">
+        <picture *ngSwitchCase="'element-img'">
+            <img src="{{elemento.contDinamico}}" alt="">
+        </picture>
+        <p *ngSwitchCase="'element-languaje'">
+            {{elemento.contDinamico}}
+        </p>
+        <div *ngSwitchCase="'element-grap'">
+            <circle-progress class="circlegrap"
+                [percent]="elemento.contDinamico" 
+            >
+            </circle-progress>
+        </div>
+    </div>
+    <div class="element-content">
+        <div class="title-element row">
+            <div class="title-element-text col">
+                <h4>{{elemento.nombre}}</h4>
+            </div>
+            <app-item-action [elemento]="elemento" [colleccion]="elementos"></app-item-action>
+        </div>
+        <div class="element-description">
+            <p class="marcation">{{elemento.titulo}}</p>
+            <div [innerHTML]="elemento.descripcion"></div>
+        </div>
+    </div>
+</div>

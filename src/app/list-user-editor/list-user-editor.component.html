@@ -1,0 +1,20 @@
+<div class="row" [formGroup]="formularioUser">
+    <div class="col-8">
+        <label for="nombre" class="col-form-label">Nombre</label>
+        <input class="form-control" id="nombre" type="text" formControlName="nombre" />
+    </div>
+    <div class="col-2">
+        <label for="" class="col-form-label">Ok</label>
+        <button class="btn" (click)="saveUser()">
+            <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+            Aceptar
+        </button>
+    </div>
+</div>
+<div class="row edtsocial" *ngFor="let user of listaUsers">
+    <div class="col">{{user.nombre}}</div>
+    <div class="col">
+        <i class="minibtn fa fa-pencil fa-lg" aria-hidden="true" (click)="editUser(user)"></i>
+        <i class="minibtn fa fa-trash fa-lg" aria-hidden="true" (click)="deleteUser(user)"></i>
+    </div>
+</div>

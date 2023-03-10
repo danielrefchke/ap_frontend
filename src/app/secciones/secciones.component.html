@@ -1,0 +1,28 @@
+<section *ngFor="let seccion of secciones" class="{{seccion.className}}">
+    <div>
+        <ngx-spinner name="spinnerDrop" bdColor="rgba(112,106,100,0.2)" size="medium" color="#312b1f" type="square-jelly-box"
+            [fullScreen]="true">
+        </ngx-spinner>
+    </div>
+    <div class="section-title row">
+        <div class="title-text col">
+            <h2>{{seccion.nombre}}
+                <i *ngIf="isLogged" class="{{showIcon(seccion.displayMode)}}" aria-hidden="true"></i>
+            </h2>
+            <div *ngIf="isLogged" class="editcomment" [ngSwitch]="seccion.displayMode">
+                <div *ngSwitchCase="'element-list-table'">
+                    La seccion es una cuadricula, pero se muestra lineal para editar.
+                </div>
+                <div *ngSwitchCase="'element-list'">
+                    La seccion se muestra tal cual es.
+                </div>
+            </div>
+        </div>
+        <app-agregador-item-seccion [seccion]="seccion"></app-agregador-item-seccion>
+        
+    </div>
+    <div class="{{processClass(seccion.displayMode)}}" [cdkDropListData]="seccion.elementos" cdkDropList (cdkDropListDropped)="drop($event)">
+        <app-item [elementos]="seccion.elementos" ></app-item>
+    </div>
+    
+</section>

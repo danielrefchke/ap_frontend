@@ -1,0 +1,154 @@
+$body-color: white;
+$section-color: #202020;
+$header-footer-color: #312b1f;
+$header-footer-text-color: #e2cfb8;
+$text-color: #fff9f3;
+$drag-text-color: #706a64;
+$font-family:"Oxygen";
+
+@mixin i-icons {
+  font-size: xx-large;
+  vertical-align: text-bottom;
+
+  &:hover {
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 1px $text-color;
+    border: none;
+  }
+}
+
+body {
+  font-family: $font-family, sans-serif;
+  font-size: larger;
+}
+
+nav {
+  background-color: $header-footer-color;
+  color: $header-footer-text-color;
+  padding: 0.5rem;
+  font-weight: 600;
+  font-size: large;
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-content: end;
+    align-items: end;
+    text-align: end;
+
+    i {
+      @include i-icons();
+    }
+
+    a {
+      color: $header-footer-text-color;
+      margin: 0rem 0.45rem;
+      &:hover {
+        color: $header-footer-text-color;
+      }
+    }
+
+    .btn {
+      background-color: $header-footer-text-color;
+      color: $header-footer-color;
+
+      &:hover {
+        box-shadow: 2px 2px 1px 1px $text-color;
+      }
+    }
+  }
+
+  .header-picture {
+    max-height: 3rem;
+  }
+}
+
+footer {
+  background-color: $header-footer-color;
+  color: $header-footer-text-color;
+  text-align: center;
+  padding: 0.5rem;
+  font-weight: 600;
+
+  .i-footer {
+    @include i-icons();
+  }
+
+  a {
+    color: $header-footer-text-color;
+    margin: 0rem 0.45rem;
+    &:hover {
+      color: $header-footer-text-color;
+    }
+  }
+}
+
+@mixin maincomponents {
+  background-color: $section-color;
+  margin: 0.25rem 0.3rem;
+  color: $text-color;
+  padding: 1.5rem;
+  min-height: 3rem;
+}
+
+header{
+  @include maincomponents();
+}
+
+section {
+  @include maincomponents();
+  min-width: 6rem;
+}
+
+button {
+  border-radius: 3px;
+  background-color: $header-footer-text-color;
+  color: $header-footer-color;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  transition: all 400ms;
+  border-radius: 2px;
+}
+
+.nav-link{
+  color:$header-footer-color;
+  &:hover{
+    color: $header-footer-text-color;
+  }
+}
+
+
+/*
+select {
+  //font-family: 'FontAwesome',$font-family;
+ 
+  .fa{
+    font-family: 'FontAwesome',$font-family;
+  }
+
+  .form-select{
+    color:red;
+  }
+}
+
+option{
+  //font-family: 'FontAwesome',$font-family;
+
+  .fa{
+    font-family: 'FontAwesome',$font-family;
+  }
+}
+*/
+
+.minibtn{
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
+}
+
+.edtsocial{
+  margin-top: 0.5rem;
+  text-align: center;
+}

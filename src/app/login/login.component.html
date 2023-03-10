@@ -1,0 +1,47 @@
+<button *ngIf="!IsLoged" class="btn" (click)="openModal(modallogin)">Acceder</button>
+<button *ngIf="IsLoged" class="btn" (click)="logout()">Salir</button>
+
+<ng-template #modallogin>
+    <form id="loginform" [formGroup]="loguinform" onsubmit="return false;">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Acceder</h1>
+            <button type="button" class="btn-close" (click)="modalRef.hide()" aria-label="Close"></button>
+        </div>
+        <div *ngIf="!IsLoged" class="modal-body">
+            <div>
+                <ngx-spinner name="spinnerLogin" bdColor="rgba(112,106,100,0.6)" size="medium" color="#312b1f"
+                    type="square-jelly-box" [fullScreen]="false"></ngx-spinner>
+            </div>
+            <div class="mb-3 form-floating ">
+                <input type="text" class="form-control" id="user" formControlName="user" placeholder="">
+                <label for="user" class="col-form-label">Usuario:</label>
+                <div *ngIf="User?.errors  && User?.touched">
+                    <p *ngIf="User?.hasError('required')" class="error-message bg-danger text-white">
+                        El Usuario es requerido.
+                    </p>
+                </div>
+            </div>
+            <div class="mb-3 form-floating ">
+                <input type="password" class="form-control" id="password" formControlName="password" placeholder="">
+                <label for="password" class="col-form-label">Password:</label>
+                <div *ngIf="Password?.errors  && Password?.touched">
+                    <p *ngIf="Password?.hasError('required')" class="error-message bg-danger text-white">
+                        El password es requerido.
+                    </p>
+                    <p *ngIf="Password?.errors?.['minlength'] " class="error-message bg-danger text-white">
+                        El password debe ser de 8 o más caracteres.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <div class="error-message bg-danger text-white" *ngIf="errorLog">
+                Error de acceso
+            </div>
+            
+            <button *ngIf="!IsLoged" type="cancel" class="btn btn-secondary" (click)="modalRef.hide()">Cancelar</button>
+            <button *ngIf="!IsLoged" type="submit" class="btn btn-primary" data-dismiss="modal"
+                (click)="onEnviar($event)" [disabled]="!loguinform.valid">Acceder</button>
+        </div>
+    </form>
+</ng-template>

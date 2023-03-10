@@ -1,0 +1,38 @@
+[
+{
+"id": 9,
+"nombre": "Elemento9",
+"titulo": "algo",
+"descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ad similique ratione dolores aliquid fugit asperiores possimus. Atque mollitia repudiandae velit. Amet aliquam error suscipit maxime ea similique voluptatum minima.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ad similique ratione dolores aliquid fugit asperiores possimus. Atque mollitia repudiandae velit. Amet aliquam error suscipit maxime ea similique voluptatum minima.",
+"classType": "element-languaje",
+"contDinamico": "Es",
+"orden": 1
+},
+{
+"id": 10,
+"nombre": "Elemento10",
+"titulo": "algo",
+"descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ad similique ratione dolores aliquid fugit asperiores possimus. Atque mollitia repudiandae velit. Amet aliquam error suscipit maxime ea similique voluptatum minima.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ad similique ratione dolores aliquid fugit asperiores possimus. Atque mollitia repudiandae velit. Amet aliquam error suscipit maxime ea similique voluptatum minima.",
+"classType": "element-languaje",
+"contDinamico": "Es",
+"orden": 2
+},
+{
+"id": 11,
+"nombre": "Elemento11",
+"titulo": "algo",
+"descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ad similique ratione dolores aliquid fugit asperiores possimus. Atque mollitia repudiandae velit. Amet aliquam error suscipit maxime ea similique voluptatum minima.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ad similique ratione dolores aliquid fugit asperiores possimus. Atque mollitia repudiandae velit. Amet aliquam error suscipit maxime ea similique voluptatum minima.",
+"classType": "element-img",
+"contDinamico": "../assets/img/crypto-trading.png",
+"orden": 3
+},
+{
+"id": 12,
+"nombre": "Elemento12",
+"titulo": "algo",
+"descripcion": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ad similique ratione dolores aliquid fugit asperiores possimus. Atque mollitia repudiandae velit. Amet aliquam error suscipit maxime ea similique voluptatum minima.Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste ad similique ratione dolores aliquid fugit asperiores possimus. Atque mollitia repudiandae velit. Amet aliquam error suscipit maxime ea similique voluptatum minima.",
+"classType": "element-grap",
+"contDinamico": "45",
+"orden": 1
+}
+]

@@ -1,0 +1,44 @@
+<div class="row" [formGroup]="formulario">
+    <div class="col">
+        <label for="seccion" class="col-form-label">Nombre</label>
+        <input class="form-control" id="seccion" type="text" formControlName="seccion" />
+    </div>
+    <div class="col">
+        <label class="col-form-label">Organización</label>
+        <div class="form-check">
+            <input class="form-check-input" id="dispmode1" type="radio" formControlName="displayMode"
+                value="element-list" />
+            <label for="dispmode1" class="form-check-label">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </label>
+        </div>
+        <div class="form-check">
+            <input class="form-check-input" id="dispmode2" type="radio" formControlName="displayMode"
+                value="element-list-table" />
+            <label for="dispmode2" class="form-check-label">
+                <i class="fa fa-th-large" aria-hidden="true"></i>
+            </label>
+        </div>
+    </div>
+    <div class="col">
+        <label for="classname" class="col-form-label">Nombre css</label>
+        <input class="form-control" id="classname" type="text" formControlName="className" />
+    </div>
+    <div class="col-2">
+        <label for="" class="col-form-label">Ok</label>
+        <button class="btn" (click)="guardarSeccion()">
+            <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+            Aceptar
+        </button>
+    </div>
+</div>
+
+<div [cdkDropListData]="secciones" cdkDropList (cdkDropListDropped)="dropSeccion($event)">
+    <div class="row edtsocial" *ngFor="let sec of secciones" cdkDrag>
+        <div class="col">{{sec.nombre}}</div>
+        <div class="col">
+            <i class="minibtn fa fa-pencil fa-lg" aria-hidden="true" (click)="editarSeccion(sec)"></i>
+            <i class="minibtn fa fa-trash fa-lg" aria-hidden="true" (click)="eliminarSeccion(sec)"></i>
+        </div>
+    </div>
+</div>

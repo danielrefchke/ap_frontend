@@ -1,0 +1,7 @@
+[
+    {"id": 1,
+     "nombre": "admin",
+     "token": "token",
+     "password":"12345678"
+    }
+]

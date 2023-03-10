@@ -1,0 +1,13 @@
+    <div class="col">
+        <picture>
+            <img class="header-picture" src="./assets/img/logo-ap.png" alt="">
+        </picture>
+        #YoProgramo
+    </div>
+    <div class="col col-auto buttons">
+        <a *ngFor="let social of socialmedia" href="{{social.url}}">
+            <i class="fa {{social.icon}}" aria-hidden="true"></i>
+        </a>
+        <app-login></app-login>
+    </div>
+

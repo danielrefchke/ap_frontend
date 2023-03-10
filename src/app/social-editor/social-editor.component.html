@@ -1,0 +1,28 @@
+<div class="row" [formGroup]="formulariosocial" >
+    <div class="col" role="dialog" tabindex="-1">
+        <label for="socialicon" class="col-form-label">Icono</label>
+        <app-icon-picker id="socialicon" formControlName="socialicon"></app-icon-picker>
+    </div>
+    <div class="col-8">
+        <label for="socialurl" class="col-form-label">Url</label>
+        <input class="form-control" id="socialurl" type="text" formControlName="socialurl" />
+    </div>
+    <div class="col-2">
+        <label for="" class="col-form-label">Ok</label>
+        <button class="btn" (click)="guardarSocial()">
+            <i class="fa fa-check fa-lg" aria-hidden="true"></i>
+            Aceptar
+        </button>
+    </div>
+</div>
+
+<div [cdkDropListData]="social" cdkDropList (cdkDropListDropped)="drop($event)">
+    <div class="row edtsocial" *ngFor="let lnk of social" cdkDrag style="z-index: 9999;">
+        <div class="col"><i class="fa fa-lg {{lnk.icon}}"></i></div>
+        <div class="col">{{lnk.url}}</div>
+        <div class="col">
+            <i class="minibtn fa fa-pencil fa-lg" aria-hidden="true" (click)="editSocial(lnk)"></i>
+            <i class="minibtn fa fa-trash fa-lg" aria-hidden="true" (click)="eliminarSocial(lnk)"></i>
+        </div>
+    </div>
+</div>

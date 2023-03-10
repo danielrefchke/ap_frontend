@@ -1,0 +1,11 @@
+<button (click)="btnClicked()" class="form-select">
+    <i class="fa {{icon}} fa-lg" aria-hidden="true"></i>
+</button>
+<div *ngIf="showed" class="icon-picker-list">
+        
+            <button *ngFor="let i of icons" (click)="iconSelected(i.cssclass)">
+                <i class="fa {{i.cssclass}} fa-lg" aria-hidden="true"></i>
+                {{i.nombre}}
+            </button>
+        
+    </div>

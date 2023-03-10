@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col grap-item-view">
+        <circle-progress class="circlegrap" [percent]="valor">
+        </circle-progress>
+    </div>
+    <div class="col">
+        <label for="porcentajegraph" class="col-form-label">Porcentaje: {{valor}}%</label>
+        <input id="porcentajegraph" type="range" class="form-range" (change)="modificado($event)"
+        [value]="valor" min="0" max="100">
+    </div>
+</div>
+

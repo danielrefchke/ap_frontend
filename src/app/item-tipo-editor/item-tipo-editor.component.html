@@ -1,0 +1,26 @@
+<div>
+    <tabset [formGroup]="formGroup" #itemeditortab>
+        <tab class="item-tipo-editor-tab" [active]="isActive('element-img')" id="element-img" heading="Imagen"
+            (selectTab)="cambiarTipo('element-img')">
+            <app-image-picker id="imgback" formControlName="contDinamico"></app-image-picker>
+        </tab>
+        <tab class="item-tipo-editor-tab" [active]="isActive('element-grap')" id="element-grap" heading="Grafico"
+            (selectTab)="cambiarTipo('element-grap')">
+            <app-graph-item-editor formControlName="contDinamico"></app-graph-item-editor>
+        </tab>
+        <tab class="item-tipo-editor-tab" [active]="isActive('element-languaje')" id="element-languaje" heading="Texto"
+            (selectTab)="cambiarTipo('element-languaje')">
+            <app-text-item-editor formControlName="contDinamico"></app-text-item-editor>
+        </tab>
+    </tabset>
+    <div *ngIf="ClassType?.errors  && ClassType?.touched">
+        <p *ngIf="ClassType?.hasError('required')" class="error-message bg-danger text-white">
+            El tipo de elemento es requerido.
+        </p>
+    </div>
+    <div *ngIf="ContenidoDinamico?.errors  && ContenidoDinamico?.touched">
+        <p *ngIf="ContenidoDinamico?.hasError('required')" class="error-message bg-danger text-white">
+            El valor del tipo es requerido.
+        </p>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+.icon-picker-list {
+  max-height: 10em;
+  min-height: 10em;
+  max-width: 15em;
+  overflow: scroll;
+  
+
+  z-index: 10;
+  position: fixed;
+  background-color: white;
+  padding: 5px;
+  border-radius: 2px;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+  display: flex;
+  gap: 2px;
+  flex-wrap: wrap;
+  
+  button{
+    padding: 4px;
+    margin: 1px;
+    min-width: 4em;
+    min-height: 4em;
+
+
+    i{
+      clear: both;
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<div [formGroup]="formGroup">
+    <div class="mb-3">
+        <label for="nombre" class="col-form-label">nombre:</label>
+        <input type="text" class="form-control" id="nombre" formControlName="nombre" placeholder="">
+        <div *ngIf="User?.errors  && User?.touched">
+            <p *ngIf="User?.hasError('required')" class="error-message bg-danger text-white">
+                El Usuario es requerido.
+            </p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="password" class="col-form-label">Password:</label>
+        <input type="password" class="form-control" id="password" formControlName="password" placeholder="">
+        <div *ngIf="Password?.errors  && Password?.touched">
+            <p *ngIf="Password?.hasError('required')" class="error-message bg-danger text-white">
+                El password es requerido.
+            </p>
+            <p *ngIf="Password?.errors?.['minlength'] " class="error-message bg-danger text-white">
+                El password debe ser de 8 o más caracteres.
+            </p>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="password2" class="col-form-label">Reitere el password:</label>
+        <input type="password" class="form-control" id="password2" formControlName="password2" placeholder="">
+        <div *ngIf="Password2?.errors  && Password2?.touched">
+            <p *ngIf="Password2?.hasError('required')" class="error-message bg-danger text-white">
+                El password es requerido.
+            </p>
+            <p *ngIf="Password2?.errors?.['minlength'] " class="error-message bg-danger text-white">
+                El password debe ser de 8 o más caracteres.
+            </p>
+            <p *ngIf="Password2.errors['mustMatch']" class="error-message bg-danger text-white">
+                Los passwords no son iguales
+            </p>
+        </div>
+    </div>
+</div>

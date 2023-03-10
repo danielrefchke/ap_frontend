@@ -1,0 +1,29 @@
+<div *ngIf="isLogged" class="title-element-buttons col">
+    <span class="button-group">
+        <i class="fa fa-pencil fa-lg" aria-hidden="true" (click)="editThis(elemento)" data-bs-toggle="modal"
+            data-bs-target="#modalitem"></i>
+        <i class="fa fa-trash fa-lg" aria-hidden="true" (click)="eliminar(modalBorrado)"></i>
+    </span>
+</div>
+
+<ng-template #modalBorrado>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5">Eliminar Elemento</h1>
+            <button type="button" class="btn-close"  aria-label="Close"></button>   
+        </div>
+        <div class="modal-body">
+            <h3>Confirma que va a eliminar el elemento?</h3>
+            <p>
+                {{elemento.nombre}}
+            </p>
+        </div>
+        <ngx-spinner name="spinnerEdit" bdColor="rgba(112,106,100,0.6)" size="medium" color="#312b1f" type="square-jelly-box"
+            [fullScreen]="false"></ngx-spinner>
+        
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Cancelar</button>
+            <button type="button" class="btn btn-primary" (click)="confirmaEliminar()">Eliminar</button>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,7 @@
+[
+  { "nombre": "Twitter", "cssclas": "fa-twitter-square" },
+  { "nombre": "GitHub", "cssclas": "fa-github-square" },
+  { "nombre": "Linkedin", "cssclas": "fa-linkedin-square" },
+  { "nombre": "Bitbucket", "cssclas": "fa-bitbucket-square" },
+  { "nombre": "Gitlab", "cssclas": "fa-gitlab" }
+]

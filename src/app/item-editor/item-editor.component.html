@@ -1,0 +1,58 @@
+<ng-template #modalitem>
+    <form id="itemform" [formGroup]="formulario" onsubmit="return false;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Editar Elemento</h1>
+                <button type="button" class="btn-close" (click)="modalRef?.hide()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <app-item-tipo-editor [formGroup]="formulario" name="classType" id="classType"
+                        formControlName="classType"></app-item-tipo-editor>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="nombreitem" class="col-form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="nombreitem" formControlName="nombre" placeholder="">
+                        <div *ngIf="Nombre?.errors  && Nombre?.touched">
+                            <p *ngIf="Nombre?.hasError('required')" class="error-message bg-danger text-white">
+                                El Nombre es requerido.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <label for="tituloitem" class="col-form-label">Titulo:</label>
+                        <input type="text" class="form-control" id="tituloitem" formControlName="titulo" placeholder="">
+                        <div *ngIf="Titulo?.errors  && Titulo?.touched">
+                            <p *ngIf="Titulo?.hasError('required')" class="error-message bg-danger text-white">
+                                El Titulo es requerido.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="descripcionitem" class="col-form-label">Texto:</label>
+
+                    <angular-editor id="descripcionitem" formControlName="descripcion"
+                        [config]="editorConfig"></angular-editor>
+                    <div *ngIf="Descripcion?.errors  && Descripcion?.touched">
+                        <p *ngIf="Descripcion?.hasError('required')" class="error-message bg-danger text-white">
+                            La descripcion es requerida.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <ngx-spinner name="spinnerEdit" bdColor="rgba(112,106,100,0.6)" size="medium" color="#312b1f"
+                        type="square-jelly-box" [fullScreen]="false"></ngx-spinner>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button *ngIf="elemento.isChanged()" type="button" class="btn btn-secondary" (click)="cancelData()">Deshacer</button>
+                <button type="button" class="btn btn-secondary" (click)="modalRef?.hide();">Cancelar</button>
+                <button type="button" class="btn btn-primary" (click)="saveData()"
+                    [disabled]="!formulario.valid">Guardar</button>
+            </div>
+        </div>
+    </form>
+</ng-template>

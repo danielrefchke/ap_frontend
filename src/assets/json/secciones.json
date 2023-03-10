@@ -1,0 +1,32 @@
+[
+{
+"id": 1,
+"nombre": "Experiencia",
+"className": "experiencia",
+"displayMode": "element-list"
+},
+{
+"id": 2,
+"nombre": "Formacion",
+"className": "formacion",
+"displayMode": "element-list"
+},
+{
+"id": 3,
+"nombre": "Skills",
+"className": "skills",
+"displayMode": "element-list-table"
+},
+{
+"id": 4,
+"nombre": "Idiomas",
+"className": "idiomas",
+"displayMode": "element-list-table"
+},
+{
+"id": 5,
+"nombre": "Proyectos",
+"className": "proyectos",
+"displayMode": "element-list"
+}
+]

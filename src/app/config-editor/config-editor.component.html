@@ -1,0 +1,35 @@
+<div *ngIf="isLogged" class="config-button">
+    <i class="fa fa-cog fa-2x" aria-hidden="true" (click)="edit(modalconfig)" data-bs-toggle="modal"></i>
+</div>
+
+<ng-template #modalconfig>
+    <form id="configform" onsubmit="return false;">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5">Editar Datos personales</h1>
+            <button type="button" class="btn-close" (click)="modalRef.hide()" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" role="dialog" tabindex="-1">
+            <tabset>
+                <tab heading="Datos de Usuario">
+                    <app-user-editor [formGroup]="formulario"></app-user-editor>
+                </tab>
+                <tab heading="Lista de Usuarios">
+                    <app-list-user-editor></app-list-user-editor>
+                </tab>
+                <tab heading="Iconos sociales">
+                    <app-icon-editor></app-icon-editor>
+                </tab>
+            </tabset>
+            <div>
+                <ngx-spinner name="spinnerConfig" bdColor="rgba(112,106,100,0.6)" size="medium" color="#312b1f"
+                    type="square-jelly-box" [fullScreen]="false"></ngx-spinner>
+            </div>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cancelData()">Cancelar</button>
+            <button type="button" class="btn btn-primary"  (click)="saveData()"
+               [disabled]="!formulario.valid" >Guardar</button>
+        </div>
+    </form>
+</ng-template>

@@ -2,19 +2,20 @@ import { EventEmitter, Injectable, Output } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
+import { CONNECTIONS } from './constants';
+import { HttpController } from './http-controler';
 import { User } from './user';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class AuthService {
   @Output() logged: EventEmitter<any> = new EventEmitter();
   private loggedSubject = new Subject<any>();
   mensajeLogged = this.loggedSubject.asObservable();
+  httpController = new HttpController(CONNECTIONS.BASE_PATH);
 
-  api = '';
-
-  token;
+  token:string;
 
   user: User;
 
@@ -27,10 +28,13 @@ export class AuthService {
     this.processStatus = true;
   }
 
-  login(user: string, password: string) {
+  login(user: string, password: string, spinername:string = "spinnerLogin") {
     // login hasta que este disponible el servicio backend
     this.user = null;
-
+    let temp = {
+        nombre: user,
+        password: password,
+      } 
     /*if (user == 'admin' && password == '12345678') {
       this.user = new User(1, user, 'token');
       localStorage.setItem('user', JSON.stringify(this.user));
@@ -38,28 +42,41 @@ export class AuthService {
     }*/
     let self = this;
     this.processStatus = true;
-    this.spinner.show('spinnerLogin');
-    setTimeout(() => {
-      if (user == 'admin' && password == '12345678') {
-        self.user = new User({
-          id: 1,
-          nombre: user,
-          token: 'token',
-          password: '12345678',
-        });
-        localStorage.setItem('user', this.user.toJson());
-        self.processStatus = true;
-        this.logged.emit(true);
-        this.toastr.success(`Bienvenido ${user}`, 'Acceso exitoso');
-      } else {
-        this.processStatus = false;
-      }
-      self.spinner.hide('spinnerLogin');
-    }, 3000);
+    this.spinner.show(spinername);
+    //console.log(CONNECTIONS.BASE_PATH+ CONNECTIONS.AUTH_API);
+    
+    this.httpController
+      .post(CONNECTIONS.AUTH_API, temp)
+      .then((response) => {
+        //console.log(response.Authorization);
+
+        HttpController.setToken(response["Authorization"]);
+        this.httpController
+          .get(CONNECTIONS.USER_DATA_RECOVER + "/" + user)
+          .then((response2) => {
+            self.user = new User({
+              id: response2["id"],
+              nombre: response2["nombre"],
+              password: password,
+              token: response.Authorization,
+            });
+            localStorage.setItem("user", this.user.toJson());
+            self.processStatus = true;
+            self.logged.emit(true);
+            self.toastr.success(`Bienvenido ${user}`, "Acceso exitoso");
+          }).catch((error) =>{
+            this.toastr.error("Ha habido un problema", "Error");
+          });
+      })
+      .catch((error) => {
+        this.toastr.error("No se ha podido autenticar", "Error de Acceso");
+      })
+      .finally(() => self.spinner.hide(spinername));
+      
   }
 
   logout() {
-    localStorage.removeItem('user');
+    localStorage.removeItem("user");
     this.user = null;
   }
 
@@ -71,19 +88,19 @@ export class AuthService {
     if (this.user) {
       return true;
     } else {
-      let usr = localStorage.getItem('user');
+      let usr = localStorage.getItem("user");
       if (usr) {
         let t = JSON.parse(usr);
         this.user = new User(t);
-
+        HttpController.setToken(this.user.getValue("token"));
         return true;
       }
     }
     return false;
   }
 
-  userLogged():User{
-    if(this.isLogged()){
+  userLogged(): User {
+    if (this.isLogged()) {
       return this.user;
     }
     return null;

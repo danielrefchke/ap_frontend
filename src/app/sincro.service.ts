@@ -10,6 +10,7 @@ import { IconSocialMedia } from './icon-social-media';
 import { HttpController } from './http-controler';
 import { Image } from './image';
 import { User } from './user';
+import { CONNECTIONS } from './constants';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,7 @@ export class SincroService {
   iconSocialList:Collection<IconSocialMedia>;
   users:Collection<User>;
 
-  httpController = new HttpController('');
+  httpController = new HttpController(CONNECTIONS.BASE_PATH);
 
   @Output() loaded: EventEmitter<any> = new EventEmitter();
   private loadSubject = new Subject<any>();
@@ -45,9 +46,12 @@ export class SincroService {
     //this.loadSubject.next(true);
     this.iconSocialList = new Collection<IconSocialMedia>(
       IconSocialMedia,
-      'assets/json/sitessocial.json'
+      CONNECTIONS.ICONS
     );
-    this.imgList = new Collection<Image>(Image, 'assets/json/imagenes.json');
+    this.imgList = new Collection<Image>(
+      Image,
+      CONNECTIONS.IMAGES
+    );
     this.load();
   }
 
@@ -55,14 +59,20 @@ export class SincroService {
     let self = this;
     this.social = new Collection<Socialmedia>(
       Socialmedia,
-      'assets/json/media.json'
+      CONNECTIONS.SOCIAL_MEDIA
     );
-    this.secciones = new Collection<Seccion>(Seccion, 'assets/json/secciones.json')
-    this.headerList = new Collection<Header>(Header, 'assets/json/header.json');
-    this.spinner.show('spinnerPrincipal');
+    this.secciones = new Collection<Seccion>(
+      Seccion,
+      CONNECTIONS.SECCIONES
+    );
+    this.headerList = new Collection<Header>(
+      Header,
+      CONNECTIONS.DATA_API
+    );
+    this.spinner.show("spinnerPrincipal");
     self.fetchHeader();
-    self.fetch(self.secciones);
-    self.fetch(self.social);
+    /*self.fetch(self.secciones);
+    self.fetch(self.social);*/
     self.fetch(this.imgList);
     self.fetch(this.iconSocialList);
   }
@@ -74,19 +84,34 @@ export class SincroService {
 
   fetchHeader():void{
     const ctrl = this;
-    setTimeout(() => {
-      ctrl.httpController
-        .get(ctrl.headerList.url)
+    ctrl.httpController
+        .get(CONNECTIONS.DATA_API)
         .then((response) => {
           //console.log(response); // Manejamos la respuesta aquí
-          ctrl.headerList.parse(response, ctrl);
-          ctrl.spinner.hide('spinnerPrincipal');
+          ctrl.header = new Header({
+            id: response["id"],
+            nombre: response["nombre"],
+            titulo: response["titulo"],
+            descripcion: response["descripcion"],
+            imgback: response["imgback"],
+            imgpersona: response["imgpersona"],
+            imgcred: response["imgcred"],
+          });
+
+          ctrl.headerList.push(ctrl.header);
+          ctrl.header.loaded();
+          console.log(response["redes"]);
+          
+          ctrl.social.parse(response["redes"]);
+          ctrl.secciones.parse(response["secciones"]);
+          ctrl.loaded.emit(ctrl.social);
           ctrl.loaded.emit(ctrl.headerList);
         })
         .catch((error) => {
           console.error(error); // Manejamos el error aquí
-        });
-    }, 5000);
+        })
+        .finally(()=>ctrl.spinner.hide('spinnerPrincipal'));
+    
   }
 
   fetch(c: Collection<any>): void {
@@ -135,8 +160,8 @@ export class SincroService {
   }
 
   get Header(): Header {
-    //return this.header;
-    return this.headerList[0];
+    return this.header;
+    //return this.headerList[0];
   }
 
   get SocialMedia(): Socialmedia[] {
@@ -152,7 +177,7 @@ export class SincroService {
   }
 
   get userList(): Collection<User> {
-    let c = new Collection<User>(User, 'assets/json/users.json');
+    let c = new Collection<User>(User, CONNECTIONS.USER_LIST);
     this.fetch(c);
     return c;
   }

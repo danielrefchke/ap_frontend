@@ -23,7 +23,7 @@ export class Collection<T> extends Array<T> {
     return this._url;
   }
 
-  public parse(elems: any,ctrl:any): void {
+  public parse(elems: any,ctrl:any=null): void {
     let self = this;
     elems.forEach((elem) => {
       const modelInstance = new self.model(elem);

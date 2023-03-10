@@ -52,7 +52,7 @@ export class Model  {
     console.log(this.prev[field]);
   }
 
-  fetch(ctrl:any):void{
+  fetch(ctrl:any=null):void{
 
   }
 }

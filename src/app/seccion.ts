@@ -9,10 +9,15 @@ export class Seccion extends Model {
     super(attr);
     this.elementos = new Collection<Elemento>(Elemento,
        `assets/json/seccion/${this.getValue('id')}.json`);
+    if (attr["elementos"]){
+      this.elementos.parse(attr["elementos"]);
+    }
   }
 
-  override fetch(ctrl: any): void {
-    ctrl.fetch(this.elementos,ctrl);
+  override fetch(ctrl: any=null): void {
+    if(ctrl){
+      ctrl.fetch(this.elementos,ctrl);
+    }
   }
 
   public get id(): number {

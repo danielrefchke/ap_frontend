@@ -56,6 +56,14 @@ export class Seccion extends Model {
   public set displayMode(value: string) {
     this.setValue('displayMode', value);
   }
+
+  public get orden():Number{
+    return this.getValue("orden")
+  }
+
+  public set orden(o:Number){
+    this.setValue("orden",o);
+  }
   /*
   public get elementos(): Elemento[] {
     return this.getValue('elementos');

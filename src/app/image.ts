@@ -1,3 +1,4 @@
+import { CONNECTIONS } from "./constants";
 import { Model } from "./model";
 
 export class Image extends Model {
@@ -15,7 +16,7 @@ export class Image extends Model {
   }
 
   get url(): string {
-    return this.getValue('url');
+    return CONNECTIONS.BASE_PATH + CONNECTIONS.IMAGES +"/"+ this.getValue('url');
   }
 
   set url(url: string) {

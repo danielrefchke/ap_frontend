@@ -57,9 +57,13 @@ export class SincroService {
     //let self = this;
     this.social = new Collection<Socialmedia>(
       Socialmedia,
-      CONNECTIONS.SOCIAL_MEDIA
+      ""
     );
-    this.secciones = new Collection<Seccion>(Seccion, CONNECTIONS.SECCIONES);
+
+    this.secciones = new Collection<Seccion>(
+      Seccion,
+      ""
+    ); 
     this.headerList = new Collection<Header>(Header, CONNECTIONS.DATA_API);
     this.users = new Collection<User>(User, CONNECTIONS.USER_LIST);
     this.spinner.show("spinnerPrincipal");
@@ -93,7 +97,9 @@ export class SincroService {
 
         ctrl.headerList.push(ctrl.header);
         ctrl.header.loaded();
-        console.log(response["redes"]);
+        
+        this.social.url = CONNECTIONS.SOCIAL_MEDIA + "/" + response["id"];
+        this.secciones.url = CONNECTIONS.SECCIONES + "/" + response["id"];
 
         ctrl.social.parse(response["redes"]);
         ctrl.secciones.parse(response["secciones"]);
@@ -218,7 +224,7 @@ export class SincroService {
     return this.iconSocialList;
   }
 
-  get Secciones(): Seccion[] {
+  get Secciones(): Collection<Seccion> {
     return this.secciones;
   }
 

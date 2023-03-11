@@ -5,7 +5,7 @@
   color: globals.$drag-text-color;
   border: solid;
   display: block;
-  z-index: 5;
+  z-index: 1024;
   visibility: visible;
   border-radius: 4px;
   box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
@@ -29,6 +29,7 @@ angular-editor{
 
 .cdk-drag-placeholder {
   opacity: 0;
+  z-index: 1024;
 }
 
 .cdk-drag-animating {

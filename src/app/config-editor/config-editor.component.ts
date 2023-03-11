@@ -4,6 +4,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Autenticated } from '../autenticated';
 import { AuthService } from '../auth.service';
 import { Collection } from '../collection';
+import { CONNECTIONS } from '../constants';
 import { IconSocialMedia } from '../icon-social-media';
 import { SincroService } from '../sincro.service';
 import { User } from '../user';
@@ -78,9 +79,18 @@ export class ConfigEditorComponent extends Autenticated {
     //this.modalRef?.hide();
     if (this.formulario.get('password').value != ''){
       //this.user.nombre = this.formulario.get('nombre').value
+      this.user.loaded();// indicar que no es nuevo
       this.user.password = this.formulario.get('password').value;
+      console.log("cambia el password"+ this.user.password);
+      
+      let tmp: Collection<User> = new Collection<User>(
+        User,
+        CONNECTIONS.USER_LIST
+      );
+      tmp.push(this.user);
+      this.sincro.sincr(tmp);
     };
-
+    
     this.sincro.sincr(this.sincro.userList);
     this.sincro.sincr(this.sincro.SocialMedialist);
 

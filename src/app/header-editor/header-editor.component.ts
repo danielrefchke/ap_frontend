@@ -73,7 +73,7 @@ export class HeaderEditorComponent extends Autenticated {
     return this.elemento;
   }
 
-  public saveData() {
+  public saveData():void {
     this.header.nombre = this.formulario.get('nombre').value;
     this.header.titulo = this.formulario.get('titulo').value;
     this.header.descripcion = this.formulario.get('descripcion').value;
@@ -83,6 +83,14 @@ export class HeaderEditorComponent extends Autenticated {
     //this.modalRef.hide();
     this.sincro.sincr(this.sincro.headerList);
     this.sincro.sincr(this.socialMedia);
+    this.sincro.sincr(this.sincro.Secciones);
+  }
+
+  public cancelData():void{
+    this.sincro.headerList.undoAll();
+    this.socialMedia.undoAll();
+    this.sincro.Secciones.undoAll();
+    this.modalRef?.hide();
   }
 
   get Nombre() {

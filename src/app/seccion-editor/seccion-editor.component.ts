@@ -51,11 +51,13 @@ export class SeccionEditorComponent {
       return;
     
     if (!this.seccion){
+      
       this.seccion = new Seccion({
         id: 0,
-        nombre: '',
-        className: '',
-        displayMode: '',
+        nombre: "",
+        className: "",
+        displayMode: "",
+        orden: this.secciones.length+1,
       });
       this.secciones.push(this.seccion);
     }
@@ -82,5 +84,10 @@ export class SeccionEditorComponent {
       event.previousIndex,
       event.currentIndex
     );
+
+    for (let index = 0; index < event.container.data.length; index++) {
+      const element = event.container.data[index];
+      element.orden = index + 1;
+    }
   }
 }

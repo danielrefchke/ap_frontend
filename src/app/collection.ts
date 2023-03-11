@@ -23,6 +23,10 @@ export class Collection<T> extends Array<T> {
     return this._url;
   }
 
+  public set url(u:string){
+    this._url = u;
+  }
+
   public undoAll():void{
     this.forEach((elemento:any)=>{
       elemento.revert();

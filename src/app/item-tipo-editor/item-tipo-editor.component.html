@@ -3,7 +3,7 @@
         <tab class="item-tipo-editor-tab" [active]="isActive('element-img')" id="element-img" heading="Imagen"
             (selectTab)="cambiarTipo('element-img')">
             <app-image-picker id="imgback" formControlName="contDinamico"></app-image-picker>
-        </tab>
+       </tab>
         <tab class="item-tipo-editor-tab" [active]="isActive('element-grap')" id="element-grap" heading="Grafico"
             (selectTab)="cambiarTipo('element-grap')">
             <app-graph-item-editor formControlName="contDinamico"></app-graph-item-editor>
@@ -11,6 +11,9 @@
         <tab class="item-tipo-editor-tab" [active]="isActive('element-languaje')" id="element-languaje" heading="Texto"
             (selectTab)="cambiarTipo('element-languaje')">
             <app-text-item-editor formControlName="contDinamico"></app-text-item-editor>
+        </tab>
+        <tab class="item-tipo-editor-tab" id="img-upload" heading="Subir imagen">
+            <app-image-uploader></app-image-uploader>
         </tab>
     </tabset>
     <div *ngIf="ClassType?.errors  && ClassType?.touched">

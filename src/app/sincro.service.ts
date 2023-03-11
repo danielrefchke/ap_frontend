@@ -55,15 +55,9 @@ export class SincroService {
 
   load() {
     //let self = this;
-    this.social = new Collection<Socialmedia>(
-      Socialmedia,
-      ""
-    );
+    this.social = new Collection<Socialmedia>(Socialmedia, "");
 
-    this.secciones = new Collection<Seccion>(
-      Seccion,
-      ""
-    ); 
+    this.secciones = new Collection<Seccion>(Seccion, "");
     this.headerList = new Collection<Header>(Header, CONNECTIONS.DATA_API);
     this.users = new Collection<User>(User, CONNECTIONS.USER_LIST);
     this.spinner.show("spinnerPrincipal");
@@ -97,7 +91,7 @@ export class SincroService {
 
         ctrl.headerList.push(ctrl.header);
         ctrl.header.loaded();
-        
+
         this.social.url = CONNECTIONS.SOCIAL_MEDIA + "/" + response["id"];
         this.secciones.url = CONNECTIONS.SECCIONES + "/" + response["id"];
 
@@ -128,9 +122,10 @@ export class SincroService {
       });
   }
 
-  async sincr(collection: Collection<Model>, spnr = "spinnerEdit") {
+  async sincr(collection: Collection<Model>) {
     let self = this;
-
+    let errors = false;
+    let operations = 0;
     const promises = [];
 
     for (const obj of collection) {
@@ -141,9 +136,11 @@ export class SincroService {
           .then((response) => {
             obj.unserialize(response);
             this.saved.next(obj);
+            operations++;
           })
           .catch((error) => {
-            console.error(error); // Manejamos el error aquí
+            errors = true;
+            //console.error(error); // Manejamos el error aquí
           })
           .finally(() => {});
       }
@@ -154,9 +151,11 @@ export class SincroService {
           .then((response) => {
             obj.unserialize(response);
             this.saved.next(obj);
+            operations++;
           })
           .catch((error) => {
-            console.error(error); // Manejamos el error aquí
+            //console.error(error); // Manejamos el error aquí
+            errors = true;
           })
           .finally(() => {});
       }
@@ -167,9 +166,12 @@ export class SincroService {
           .then((response) => {
             let index = collection.indexOf(obj);
             collection.splice(index, 1);
+            this.saved.next(obj);
+            operations++;
           })
           .catch((error) => {
-            console.error(error); // Manejamos el error aquí
+            //console.error(error); // Manejamos el error aquí
+            errors = true;
           })
           .finally(() => {});
       }
@@ -184,32 +186,33 @@ export class SincroService {
 
     await Promise.all(promises);
 
-    this.saved.next(collection);
-
-    //this.spinner.show(spnr);
-    //setTimeout(() => {
-    /* this.spinner.hide(spnr);
-      
-        this.toastr.success("Guardado!!");
-        this.saved.next(true);
-     
-        this.error.next(true);
-        this.toastr.error(
-          "Vuelva a intentar en unos segundos",
-          "No se pudo guardar!!"
-        );
-      }*/
-    //}, 3000);
-  }
-
-  randomBoolean(): boolean {
-    const randomNumber = Math.random();
-    if (randomNumber > 0.2) {
-      return true;
-    } else {
-      return false;
+    if (errors) {
+      this.toastr.error(
+        "Vuelva a intentar en unos segundos",
+        "Algunos datos no se guardaron!!"
+      );
+    } else if (operations > 0) {
+      this.toastr.success("Guardado!!");
     }
+
+    this.saved.next(collection);
   }
+
+  async uploadFile(formData){
+    
+    this.httpController
+      .postFormData(CONNECTIONS.IMAGES, formData)
+      .then((response) => {
+        this.toastr.success("Guardado!!");
+        this.fetch(this.imgList);
+        this.saved.next(formData);
+      })
+      .catch((error) => {
+        //console.error(error); // Manejamos el error aquí
+        this.error.next(formData);
+        this.toastr.error("No se pudo cargar el archivo!!","Error de carga");
+      });
+  };
 
   get Header(): Header {
     return this.header;

@@ -2,6 +2,7 @@ import { Component,Input, OnInit } from '@angular/core';
 import { Autenticated } from '../autenticated';
 import { AuthService } from '../auth.service';
 import { BusItemService } from '../bus-item.service';
+import { Collection } from '../collection';
 import { Elemento } from '../elemento';
 import { Seccion } from '../seccion';
 
@@ -13,22 +14,14 @@ import { Seccion } from '../seccion';
   styleUrls: ['./item.component.sass'],
 })
 export class ItemComponent extends Autenticated {
-  @Input() elementos: any[];
+  @Input() elementos: Collection<Elemento>;
 
   constructor(auth: AuthService, private bus: BusItemService) {
     super(auth);
   }
-
-  public editThis(e: Elemento) {
-    this.bus.editThis(e);
+  
+  public toNumber(value:string):number {
+    return Number.parseFloat(value);
   }
-
-  public eliminar(s: Elemento[], e: Elemento) {
-    if (confirm('Eliminar')) {
-      let i = s.indexOf(e);
-      s.splice(i, 1);
-    }
-  }
-
   
 }

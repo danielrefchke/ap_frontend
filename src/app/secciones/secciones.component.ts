@@ -5,20 +5,19 @@ import { AuthService } from '../auth.service';
 import { Elemento } from '../elemento';
 import { SincroService } from '../sincro.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Collection } from '../collection';
+import { Seccion } from '../seccion';
 
 @Component({
-  selector: 'app-secciones',
-  templateUrl: './secciones.component.html',
-  styleUrls: ['./secciones.component.sass'],
+  selector: "app-secciones",
+  templateUrl: "./secciones.component.html",
+  styleUrls: ["./secciones.component.sass"],
 })
-export class SeccionesComponent
-  extends Autenticated
-  
-{
-  secciones;
+export class SeccionesComponent extends Autenticated {
+  secciones: Collection<Seccion>;
   private fistTime: boolean;
 
-  private evt: CdkDragDrop<Elemento[]>;
+  private evt: CdkDragDrop<Collection<Elemento>>;
 
   constructor(
     auth: AuthService,
@@ -30,7 +29,12 @@ export class SeccionesComponent
 
     sincro.loaded.subscribe((data) => {
       //this.secciones = this.sincro.Secciones;
-      
+    });
+
+    this.sincro.saved.subscribe((mensaje) => {
+      if (this.evt?.container.data === mensaje) {
+        this.spinner.hide("spinnerDrop");
+      }
     });
 
     this.sincro.error.subscribe((data) => {
@@ -47,32 +51,32 @@ export class SeccionesComponent
     this.secciones = this.sincro.Secciones;
   }
 
-  showIcon(cls:string):string{
-    let result:string;
+  showIcon(cls: string): string {
+    let result: string;
     switch (cls) {
-      case 'element-list':
-        result = 'fa fa-bars';
+      case "element-list":
+        result = "fa fa-bars";
         break;
-      case 'element-list-table':
-        result = 'fa fa-th-large';
+      case "element-list-table":
+        result = "fa fa-th-large";
         break;
 
       default:
-        result = '';
+        result = "";
         break;
     }
     return result;
   }
 
-  processClass(cls:string):string{
-    if(cls == 'element-list-table' && this.isLogged){
-      return 'element-list';
+  processClass(cls: string): string {
+    if (cls == "element-list-table" && this.isLogged) {
+      return "element-list";
     }
 
     return cls;
   }
 
-  drop(event: CdkDragDrop<Elemento[]>) {
+  drop(event: CdkDragDrop<Collection<Elemento>>) {
     //console.log(event);
     this.evt = event;
     moveItemInArray(
@@ -83,8 +87,10 @@ export class SeccionesComponent
     // asignamos el nuevo orden de los elementos
     for (let index = 0; index < event.container.data.length; index++) {
       const element = event.container.data[index];
-      element.orden=index+1;
+      element.orden = index + 1;
     }
-    //this.sincro.sincr(event.container.data[event.currentIndex], 'spinnerDrop');
+    this.spinner.show("spinnerDrop");
+
+    this.sincro.sincr(event.container.data);
   }
 }

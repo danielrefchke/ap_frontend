@@ -35,6 +35,7 @@ import { ConfigEditorComponent } from './config-editor/config-editor.component';
 import { UserEditorComponent } from './user-editor/user-editor.component';
 import { IconEditorComponent } from './icon-editor/icon-editor.component';
 import { ListUserEditorComponent } from './list-user-editor/list-user-editor.component';
+import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { ListUserEditorComponent } from './list-user-editor/list-user-editor.com
     UserEditorComponent,
     IconEditorComponent,
     ListUserEditorComponent,
+    ImageUploaderComponent,
   ],
   imports: [
     BrowserModule,

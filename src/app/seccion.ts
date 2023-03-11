@@ -11,7 +11,7 @@ export class Seccion extends Model {
     
     this.elementos = new Collection<Elemento>(
       Elemento,
-      `${CONNECTIONS.SECCIONES}/${this.getValue("id")}`
+      `${CONNECTIONS.ELEMENTOS}/${this.getValue("id")}`
     );
     if (attr["elementos"]){
       this.elementos.parse(attr["elementos"]);

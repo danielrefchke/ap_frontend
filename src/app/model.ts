@@ -38,7 +38,7 @@ export class Model {
 
   unserialize(attr: {}):void{
     this.attr = attr;
-    this.prev = {};
+    this.loaded();
   };
 
   toJson(): string {

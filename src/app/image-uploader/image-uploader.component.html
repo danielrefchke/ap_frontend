@@ -1,0 +1,11 @@
+<label for="uploader" class="col-form-label">Subir una imagen</label>
+<div class="row">
+    <div class="col">
+        <input class="form-control" type="file" (change)="onFileSelected($event)" name="uploader">
+    </div>
+    <div class="col-3">
+        <button class="btn btn-primary" (click)="onUpload()">Subir imagen</button>
+    </div>
+    <ngx-spinner name="spinnerUploader" bdColor="rgba(112,106,100,0.6)" size="medium" color="#312b1f" type="square-jelly-box"
+        [fullScreen]="false"></ngx-spinner>
+</div>

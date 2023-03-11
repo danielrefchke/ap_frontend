@@ -8,4 +8,5 @@ export const CONNECTIONS = {
   SOCIAL_MEDIA: "/social",
   SECCIONES: "/seccion",
   USER_LIST: "/users",
+  ELEMENTOS: "/elemento",
 } as const;

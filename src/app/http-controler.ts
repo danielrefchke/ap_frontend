@@ -77,4 +77,22 @@ export class HttpController {
 
     return await response.json();
   }
+
+  async postFormData(url, formData) {
+    
+    const options = {
+      method: "POST",
+      body: formData,
+      headers: {Authorization: `${HttpController.AUTH_TOKEN}`, },
+    };
+    const response = await fetch(`${this.baseUrl}${url}`, options);
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    return response.json();
+    
+   
+  }
 }

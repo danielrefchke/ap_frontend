@@ -31,7 +31,7 @@ export class ConfigEditorComponent extends Autenticated {
     super(auth);
     this.formulario = this.formBuilder.group(
       {
-        nombre: ["", [Validators.required]],
+        nombre: [{ value: "", disabled: true }, [Validators.required]],
         password: ["", [Validators.minLength(8)]],
         password2: ["", [Validators.minLength(8)]],
       },

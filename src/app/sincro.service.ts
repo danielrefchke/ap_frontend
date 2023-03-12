@@ -214,6 +214,26 @@ export class SincroService {
       });
   };
 
+  public async existeUsuario(nombre:string):Promise<boolean>{
+    let respuesta:boolean;
+    let promise = this.httpController
+      .get(CONNECTIONS.USER_NAME_VERIFIER + "/" + nombre)
+      .then((response) => {
+        respuesta = response["exist"];
+        if (respuesta) {
+          this.toastr.error("El usuario ya existe!!", "Nombre inválido");
+        }
+      })
+      .catch((error) => {
+        //console.error(error); // Manejamos el error aquí
+        this.toastr.error("No se pudo verificar!!!","Error!!");
+        respuesta=true;
+      });
+    
+    await promise;
+    return respuesta;
+  }
+
   get Header(): Header {
     return this.header;
     //return this.headerList[0];

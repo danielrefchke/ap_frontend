@@ -38,12 +38,13 @@ export class SeccionesComponent extends Autenticated {
     });
 
     this.sincro.error.subscribe((data) => {
-      if (this.evt) {
+      if (this.evt) {/* deshabiltado este comportamiento por ahora
         moveItemInArray(
           this.evt.container.data,
           this.evt.currentIndex,
           this.evt.previousIndex
-        );
+        );*/
+        this.spinner.hide("spinnerDrop");
       }
       this.evt = null;
     });

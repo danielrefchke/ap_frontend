@@ -28,7 +28,8 @@ export class ListUserEditorComponent {
     this.formularioUser.get("nombre").setValue(u.nombre);
   }
 
-  async saveUser() { // es asincronica por fuerza
+  async saveUser() {
+    // es asincronica por fuerza
     if (
       this.formularioUser.get("nombre").value == ""
       //|| this.formularioUser.get('cssclass').value == ''
@@ -36,19 +37,22 @@ export class ListUserEditorComponent {
       return;
     }
 
-    if (!this.user) {
-      // verificar que no exista el nombre de usuario
-      var respuesta:boolean ;
-
-      await this.sincro.existeUsuario(this.formularioUser.get("nombre").value)
-      .then((response)=>{
-          respuesta = response;
+    var respuesta: boolean;
+    // verificar que no exista el nombre de usuario
+    await this.sincro
+      .existeUsuario(this.formularioUser.get("nombre").value)
+      .then((response) => {
+        respuesta = response;
       });
 
-      if (!respuesta) {
-        this.user = new User({ id: 0, nombre: "", token: "" });
-        this.listaUsers.push(this.user);
-      }else return;
+    if (respuesta) {
+        // existe el usuario
+        return ;
+    }
+
+    if (!this.user) {
+      this.user = new User({ id: 0, nombre: "", token: "" });
+      this.listaUsers.push(this.user);
     }
 
     this.user.nombre = this.formularioUser.get("nombre").value;

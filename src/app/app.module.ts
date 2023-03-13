@@ -36,6 +36,7 @@ import { UserEditorComponent } from './user-editor/user-editor.component';
 import { IconEditorComponent } from './icon-editor/icon-editor.component';
 import { ListUserEditorComponent } from './list-user-editor/list-user-editor.component';
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
+import { HelpComponentComponent } from './help-component/help-component.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { ImageUploaderComponent } from './image-uploader/image-uploader.componen
     IconEditorComponent,
     ListUserEditorComponent,
     ImageUploaderComponent,
+    HelpComponentComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,29 +1,34 @@
 @use "globals";
 
+@mixin header_buttons {
+  text-align: end;
+  margin-bottom: -2rem;
+  z-index: revert;
+  position: relative;
+  max-width: 3rem;
+  max-height: 3rem;
+  cursor: pointer;
+  color: globals.$header-footer-text-color;
+}
+
 .header {
   .header-button {
-    text-align: end;
-    margin-bottom: -2rem;
-    z-index: revert;
-    position: relative;
+    @include header_buttons();
     margin: auto 0.5rem -2rem auto;
-    max-width: 3rem;
-    max-height: 3rem;
-    cursor: pointer;
-    color: globals.$header-footer-text-color;
   }
 
-  .config-button{
-    text-align: end;
-    margin-bottom: -2rem;
-    z-index: revert;
-    position: relative;
+  .config-button {
+
+    @include header_buttons();
     margin: auto 4rem -2rem auto;
-    max-width: 3rem;
-    max-height: 3rem;
-    cursor: pointer;
-    color: globals.$header-footer-text-color;
     top: -0.5rem;
+  }
+
+  .help-button {
+
+    @include header_buttons();
+    margin: auto 7.5rem -2rem auto;
+    top: -1rem;
   }
 
   .banner {
@@ -136,7 +141,7 @@
   flex-direction: column;
 }
 
-.editcomment{
+.editcomment {
   font-size: 0.7rem;
   font-weight: lighter;
 }
@@ -248,7 +253,7 @@
   }
 }
 
-@mixin messages{
+@mixin messages {
   border-radius: 5px;
   margin: 0.25rem;
   padding: 0.5rem;
@@ -261,7 +266,7 @@
 }
 .error-message {
   @include messages();
-  
+
   &::before {
     content: "\f071";
   }

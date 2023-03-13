@@ -1,0 +1,101 @@
+<div *ngIf="isLogged" class="help-button">
+    <i class="fa fa-question-circle fa-2x" aria-hidden="true" (click)="showHeader(modalhelp)" data-bs-toggle="modal"
+        data-bs-target="#modalheader"></i>
+</div>
+
+<ng-template #modalhelp>
+    <div class="modal-header">
+        <h1 class="modal-title fs-5">Como usar esta aplicacion</h1>
+        <button type="button" class="btn-close" (click)="modalRef.hide()" aria-label="Close"></button>
+    </div>
+    <div class="modal-body" role="dialog" tabindex="-1">
+        <p>¡Bienvenido a la guía de ayuda! En esta guía encontrarás información detallada sobre las características
+            del sistema y cómo utilizarlas para lograr tus objetivos.</p>
+        <p>Cuentas con las siguientes opciones:</p>
+        <tabset>
+            <tab heading="Configuración:" customClass="config">
+
+                <i class="fa fa-cog fa-2x" aria-hidden="true"></i> La sección de configuración es donde puedes
+                personalizar el sistema según tus necesidades. Hay tres solapas
+                disponibles:
+                Datos de usuario, Lista de usuarios y Lista de iconos sociales.
+                <ul>
+                    <li>
+                        Datos de usuario: En la solapa de Datos de usuario, puedes cambiar tu contraseña actual por una
+                        nueva.
+                        Para hacerlo,
+                        simplemente ingresa la nueva contraseña que deseas utilizar. Es importante que la nueva
+                        contraseña sea
+                        segura y
+                        que la recuerdes para futuros ingresos al sistema.</li>
+
+                    <li>
+                        Lista de usuarios: En la solapa de Lista de usuarios, puedes crear, editar y borrar usuarios.
+                        Para crear
+                        un nuevo
+                        usuario, ingresa la información requerida. Luego, haz clic en
+                        "Guardar" para agregar el nuevo usuario al sistema. Para editar o borrar un usuario existente,
+                        simplemente selecciona el
+                        usuario correspondiente y haz clic en "Editar" o "Borrar" según corresponda.
+                    </li>
+
+                    <li>
+                        Lista de iconos sociales:
+                        En la solapa de Lista de iconos sociales, puedes crear, editar y eliminar los iconos de las
+                        redes sociales
+                        que aparecen
+                        en el sistema. Para crear un nuevo icono, ingresa la información requerida, como la clase de
+                        FontAwesome (el
+                        sistema se basa en esta) y el nombre del icono. Luego,
+                        haz clic en "Guardar" para agregar el nuevo icono al sistema. Para editar o eliminar un icono
+                        existente,
+                        simplemente
+                        selecciona el icono correspondiente y haz clic en "Editar" o "Borrar" según corresponda.
+                    </li>
+
+                </ul>
+
+            </tab>
+            <tab heading="Datos Personales:" customClass="config">
+
+                <i class="fa fa-pencil-square fa-2x" aria-hidden="true"></i> Los datos personales se organizan en tres
+                solapas:
+                <ul>
+                    <li>Datos Personales: en esta solapa, puedes editar la información personal que has proporcionado.
+                    </li>
+                    <li>Imágenes: aquí puedes elegir las imágenes de fondo y de perfil que deseas utilizar en tu perfil.
+                        También puedes indicar
+                        si las imágenes provienen de un banco de imágenes o si son de tu propiedad.</li>
+                    <li>Redes sociales: en esta solapa, puedes agregar o editar tus perfiles en redes sociales para que se muestren en tu
+                    perfil.Además, puedes reordenarlas
+                    fácilmente arrastrándolas y soltándolas.</li>
+                    <li>Secciones: en esta solapa, puedes crear, editar o eliminar secciones de tu perfil. Además, puedes reordenarlas
+                    fácilmente arrastrándolas y soltándolas.
+                    Aqui tambien se puede indicar la clase CSS personalizada de la seccion y como se va a configurar (lista o cuadricula). En el modo edicion siempre se mostrara como una lista.
+                </li>
+                </ul>
+            </tab>
+            <tab heading="Secciones:" customClass="config">
+                Aquí se presenta el contenido de cada sección del perfil, en donde podrás realizar las siguientes acciones:
+                <ul>
+                    <li>Agregar elementos a una sección: podrás incluir nuevos elementos en cada sección de tu perfil.</li>
+                    <li>Editar elementos de una sección: podrás modificar cualquier elemento de una sección de tu perfil para actualizar su
+                    contenido o detalles.</li>
+                    <li>Eliminar elementos de una sección: podrás eliminar elementos que ya no desees mostrar en una sección específica de tu
+                    perfil.</li>
+                    <li>Reordenar elementos de una sección: podrás cambiar el orden de los elementos de cada sección arrastrándolos y
+                    soltándolos en el lugar que desees. Esto te permitirá personalizar el orden de los elementos según tu preferencia.</li>
+                </ul>
+
+                Al crear o editar un elemento en una sección, podrás elegir entre los siguientes tipos:
+                <ul>
+                    <li>Imagen: el elemento mostrará una imagen que hayas seleccionado</li>
+                    <li>Gráfico: el elemento mostrará un gráfico que muestra el valor indicado.</li>
+                    <li>Texto: el elemento mostrará un texto con una longitud máxima de dos caracteres.</li>
+                </ul>
+                Es importante destacar que puedes agregar cualquier tipo de elemento en cualquier sección de tu perfil, lo que te
+                permitirá personalizar tu perfil de acuerdo a tus necesidades y preferencias.
+            </tab>
+        </tabset>
+    </div>
+</ng-template>

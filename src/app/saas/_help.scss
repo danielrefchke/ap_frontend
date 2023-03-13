@@ -1,0 +1,9 @@
+@use "globals";
+
+@mixin tabconf{
+    
+}
+
+.config{
+    @include tabconf();
+}

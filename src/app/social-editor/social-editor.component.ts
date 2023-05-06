@@ -1,13 +1,13 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { SincroService } from '../sincro.service';
-import { Socialmedia } from '../socialmedia';
+import { CdkDragDrop, moveItemInArray } from "@angular/cdk/drag-drop";
+import { Component } from "@angular/core";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { SincroService } from "../sincro.service";
+import { Socialmedia } from "../socialmedia";
 
 @Component({
-  selector: 'app-social-editor',
-  templateUrl: './social-editor.component.html',
-  styleUrls: ['./social-editor.component.sass'],
+  selector: "app-social-editor",
+  templateUrl: "./social-editor.component.html",
+  styleUrls: ["./social-editor.component.sass"],
 })
 export class SocialEditorComponent {
   formulariosocial: FormGroup;
@@ -18,8 +18,8 @@ export class SocialEditorComponent {
 
   constructor(private formBuilder: FormBuilder, private sincro: SincroService) {
     this.formulariosocial = this.formBuilder.group({
-      socialicon: ['', []],
-      socialurl: ['', []],
+      socialicon: ["", []],
+      socialurl: ["", []],
     });
     this.socialMedia = this.sincro.SocialMedia;
   }
@@ -27,33 +27,31 @@ export class SocialEditorComponent {
   public editSocial(s: Socialmedia) {
     this.esocial = s;
 
-    this.formulariosocial.get('socialicon').setValue(s.icon);
-    this.formulariosocial.get('socialurl').setValue(s.url);
+    this.formulariosocial.get("socialicon").setValue(s.icon);
+    this.formulariosocial.get("socialurl").setValue(s.url);
   }
 
   public guardarSocial() {
     if (
-      this.formulariosocial.get('socialicon').value == '' ||
-      this.formulariosocial.get('socialurl').value == ''
+      this.formulariosocial.get("socialicon").value == "" ||
+      this.formulariosocial.get("socialurl").value == ""
     ) {
       return;
     }
 
     if (!this.esocial) {
-      this.esocial = new Socialmedia(
-        { id: 0, icon: '', url: '' }
-      );
+      this.esocial = new Socialmedia({ icon: "", url: "" });
       this.sincro.SocialMedia.push(this.esocial);
     }
-    this.esocial.icon = this.formulariosocial.get('socialicon').value;
-    this.esocial.url = this.formulariosocial.get('socialurl').value;
+    this.esocial.icon = this.formulariosocial.get("socialicon").value;
+    this.esocial.url = this.formulariosocial.get("socialurl").value;
     this.esocial = null;
-    this.formulariosocial.get('socialicon').setValue('');
-    this.formulariosocial.get('socialurl').setValue('');
+    this.formulariosocial.get("socialicon").setValue("");
+    this.formulariosocial.get("socialurl").setValue("");
   }
 
   public eliminarSocial(s: Socialmedia) {
-    if (confirm('Eliminar?')) {
+    if (confirm("Eliminar?")) {
       let i = this.sincro.SocialMedia.indexOf(s);
       this.sincro.SocialMedia.splice(i, 1);
     }
@@ -64,11 +62,11 @@ export class SocialEditorComponent {
   }
 
   get socialIcon() {
-    return this.formulariosocial.get('socialicon');
+    return this.formulariosocial.get("socialicon");
   }
 
   get socialUrl() {
-    return this.formulariosocial.get('socialurl');
+    return this.formulariosocial.get("socialurl");
   }
 
   get SocialList(): any[] {

@@ -1,6 +1,6 @@
 export const CONNECTIONS = {
   BASE_PATH: "https://apbackendrefchke.onrender.com",
-  //BASE_PATH: "http://localhost:8080",
+  //BASE_PATH: "http://localhost:8080",//
   AUTH_API: "/login",
   USER_DATA_RECOVER: "/users",
   USER_NAME_VERIFIER: "/users/exist",

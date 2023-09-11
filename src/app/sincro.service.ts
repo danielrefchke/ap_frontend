@@ -10,7 +10,7 @@ import { IconSocialMedia } from "./icon-social-media";
 import { HttpController } from "./http-controler";
 import { Image } from "./image";
 import { User } from "./user";
-import { CONNECTIONS } from "./constants";
+import { CONNECTIONS, STATUS_MESSAGE_GROUPS } from "./constants";
 import { Model } from "./model";
 
 @Injectable({
@@ -24,6 +24,12 @@ export class SincroService {
   imgList: Collection<Image>;
   iconSocialList: Collection<IconSocialMedia>;
   users: Collection<User>;
+
+  private maxRetries = 5; // Número máximo de intentos de conexión al backend
+  private retryDelay = CONNECTIONS.DELAY_TIME / 2; // Retraso entre reintentos en milisegundos
+  public statusMessage: string = ''; // Miembro para almacenar el mensaje de estado
+
+  private messageGroup:string[];
 
   httpController = new HttpController(CONNECTIONS.BASE_PATH);
 
@@ -44,7 +50,11 @@ export class SincroService {
     private spinner: NgxSpinnerService,
     private toastr: ToastrService
   ) {
-    //this.loadSubject.next(true);
+    // inicializamos los mensajes
+    const randomGroupIndex = Math.floor(Math.random() * STATUS_MESSAGE_GROUPS.length);
+    
+    this.messageGroup = STATUS_MESSAGE_GROUPS[randomGroupIndex];
+    
     this.iconSocialList = new Collection<IconSocialMedia>(
       IconSocialMedia,
       CONNECTIONS.ICONS
@@ -61,12 +71,65 @@ export class SincroService {
     this.headerList = new Collection<Header>(Header, CONNECTIONS.DATA_API);
     this.users = new Collection<User>(User, CONNECTIONS.USER_LIST);
     this.spinner.show("spinnerPrincipal");
+    this.statusMessage = "Inicializando";
+    this.startService();
+    //this.fetch(this.users);
+  }
+
+  public loadData():void{
+    this.statusMessage = "Preparando el café con amor y bytes";
     this.fetchHeader();
-    /*self.fetch(self.secciones);
-    self.fetch(self.social);*/
     this.fetch(this.imgList);
     this.fetch(this.iconSocialList);
-    //this.fetch(this.users);
+  }
+
+  public startService(): Promise<any> {
+    return this.checkBackendAvailability()
+      .then(() => this.loadData())
+      .catch((error) => {
+        // Manejar el error aquí y establecer el mensaje de estado
+        console.error('Error al iniciar el servicio:', error);
+        this.statusMessage = 'No se pudo conectar al backend.'+
+          this.messageGroup[this.messageGroup.length-1];
+        throw error; // Re-lanzar el error para que lo maneje el componente que llama a startService
+      });
+  }
+
+   private checkBackendAvailability(): Promise<void> {
+    let retryCount = 0;
+
+    const attemptConnection = () => {
+      return this.testBackendConnection()
+        .then(() => {
+          // Conexión exitosa, no se necesita reintentar
+        })
+        .catch((error) => {
+          this.statusMessage = this.messageGroup[retryCount];
+          retryCount++;
+          console.log(`Retry attempt ${retryCount}`);
+          if (retryCount <= this.maxRetries) {
+            // Reintentar después de un retraso
+            return new Promise<void>((resolve) => {
+              setTimeout(() => resolve(attemptConnection()), this.retryDelay);
+            });
+          } else {
+            // Superado el número máximo de reintentos, arrojar un error
+            throw error;
+          }
+        });
+    };
+
+    return attemptConnection();
+  }
+
+  private testBackendConnection(): Promise<void> {
+    const healthCheckPath = CONNECTIONS.START_SERVICE; // Endpoint para verificar la salud del backend
+
+    return this.httpController
+      .test(healthCheckPath) // Usa el método test de HttpController
+      .catch((error) => {
+        throw new Error(`Error de conexión al backend: ${error.message}`);
+      });
   }
 
   loadImageList(): Collection<Image> {

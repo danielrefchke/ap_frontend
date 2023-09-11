@@ -37,6 +37,7 @@ import { IconEditorComponent } from './icon-editor/icon-editor.component';
 import { ListUserEditorComponent } from './list-user-editor/list-user-editor.component';
 import { ImageUploaderComponent } from './image-uploader/image-uploader.component';
 import { HelpComponentComponent } from './help-component/help-component.component';
+import { SpinerMessageComponent } from './spiner-message/spiner-message.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { HelpComponentComponent } from './help-component/help-component.componen
     ListUserEditorComponent,
     ImageUploaderComponent,
     HelpComponentComponent,
+    SpinerMessageComponent,
   ],
   imports: [
     BrowserModule,

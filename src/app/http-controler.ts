@@ -1,3 +1,5 @@
+import { CONNECTIONS } from "./constants";
+
 export class HttpController {
   private baseUrl: string;
   private static AUTH_TOKEN = "miTokenJWT";
@@ -15,6 +17,18 @@ export class HttpController {
       "Content-Type": "application/json",
       Authorization: `${HttpController.AUTH_TOKEN}`,
     };
+  }
+
+  public test(path:string,timeout=CONNECTIONS.DELAY_TIME): Promise<any>{
+    const url = `${this.baseUrl}${path}`;
+    const options = {method: 'GET'};
+    return Promise.race([
+      fetch(url, options),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('Tiempo de espera excedido')), timeout)
+      )
+  ]);
+    
   }
 
   public async get<T>(path: string): Promise<T> {

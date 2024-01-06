@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SincroService } from '../sincro.service';
+import { SincroService } from '../services/sincro.service';
 
 @Component({
   selector: 'footer',

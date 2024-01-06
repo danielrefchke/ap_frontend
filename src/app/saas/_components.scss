@@ -11,6 +11,27 @@
   color: globals.$header-footer-text-color;
 }
 
+@mixin link-base {
+  background-color: globals.$header-footer-text-color;
+  color: globals.$section-color;
+  text-decoration: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  margin-right: 5px;
+  font-weight: bolder;
+  font-variant: small-caps;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &::after {
+    font-family: FontAwesome;
+    content: "\f14c";
+    margin-left: 3px;
+  }
+}
+
 .header {
   .header-button {
     @include header_buttons();
@@ -78,6 +99,10 @@
         font-weight: 200;
         font-size: 1.1;
       }
+
+      a {
+        @include link-base();
+      }
     }
   }
 }
@@ -115,26 +140,7 @@
   gap: 0.5rem;
 }
 
-@mixin link-base {
-  background-color: globals.$header-footer-text-color;
-  color: globals.$section-color;
-  text-decoration: none;
-  padding: 0.5rem;
-  border-radius: 5px;
-  margin-right: 5px;
-  font-weight: bolder;
-  font-variant: small-caps;
 
-  &:hover {
-    text-decoration: underline;
-  }
-
-  &::after {
-    font-family: FontAwesome;
-    content: "\f14c";
-    margin-left: 3px;
-  }
-}
 
 .element-list {
   @include list-base();

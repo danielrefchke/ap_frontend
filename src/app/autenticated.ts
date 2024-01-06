@@ -1,4 +1,4 @@
-import { AuthService } from "./auth.service";
+import { AuthService } from "./services/auth.service";
 
 export class Autenticated {
   constructor(protected auth: AuthService) {}

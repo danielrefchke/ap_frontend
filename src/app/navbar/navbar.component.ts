@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Autenticated } from '../autenticated';
-import { AuthService } from '../auth.service';
-import { SincroService } from '../sincro.service';
+import { AuthService } from '../services/auth.service';
+import { SincroService } from '../services/sincro.service';
 
 @Component({
   selector: 'nav',

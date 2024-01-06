@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Autenticated } from '../autenticated';
 

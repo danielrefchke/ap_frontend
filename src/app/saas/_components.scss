@@ -170,12 +170,22 @@
     font-size: 4rem;
     max-width: 5rem;
     min-width: 5rem;
+    
   }
 
   .element-grap {
     .circlegrap {
       max-width: 5rem;
       min-width: 5rem;
+    }
+  }
+
+  .element-icon {
+    i {
+      max-width: 5rem;
+      min-width: 5rem;
+      font-size: 4rem;
+      margin: auto;
     }
   }
 

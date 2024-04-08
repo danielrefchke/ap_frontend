@@ -1,0 +1,11 @@
+.element-icon-view {
+  max-width: 8rem;
+  min-width: 8rem;
+}
+
+.element-icon-view i {
+  min-width: 90%;
+  min-height: 90%;
+  font-size: 6rem;
+  margin: auto;
+}

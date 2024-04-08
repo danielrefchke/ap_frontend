@@ -1,0 +1,9 @@
+<div class="row">
+    <div class="col element-icon-view">
+        <i class="fa {{valor}}" aria-hidden="true"></i>
+    </div>
+    <div class="col">
+        <label for="iconeditor" class="col-form-label">Icono: </label>
+        <input id="iconeditor" type="text" class="form-control" (input)="modificado($event)" [value]="valor">
+    </div>
+</div>

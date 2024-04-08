@@ -1,15 +1,15 @@
-<div  class="element" *ngFor="let elemento of elementos" cdkDrag [cdkDragDisabled]="!isLogged">
+<div class="element" *ngFor="let elemento of elementos" cdkDrag [cdkDragDisabled]="!isLogged">
     <div [ngSwitch]="elemento.classType" class="{{elemento.classType}}">
         <picture *ngSwitchCase="'element-img'">
             <img src="{{elemento.contDinamico}}" alt="">
         </picture>
-        <p *ngSwitchCase="'element-languaje'">
+        <span *ngSwitchCase="'element-languaje'">
             {{elemento.contDinamico}}
-        </p>
+        </span>
+        <i *ngSwitchCase="'element-icon'" class="fa {{elemento.contDinamico}}" aria-hidden="true">
+        </i>
         <div *ngSwitchCase="'element-grap'">
-            <circle-progress class="circlegrap"
-                [percent]="toNumber(elemento.contDinamico)" 
-            >
+            <circle-progress class="circlegrap" [percent]="toNumber(elemento.contDinamico)">
             </circle-progress>
         </div>
     </div>

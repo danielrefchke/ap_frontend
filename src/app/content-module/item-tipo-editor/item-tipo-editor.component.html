@@ -16,7 +16,11 @@
             (selectTab)="cambiarTipo('element-icon')">
             <app-icon-item-editor formControlName="contDinamico"></app-icon-item-editor>
         </tab>
-        <tab class="item-tipo-editor-tab" id="img-upload" heading="Subir imagen">
+        <tab class="item-tipo-editor-tab" [active]="isActive('element-remote-img')" id="img-remote" heading="URL"
+            (selectTab)="cambiarTipo('element-remote-img')">
+            <app-remote-image formControlName="contDinamico"></app-remote-image>
+        </tab>
+        <tab class="item-tipo-editor-tab" id="img-upload" heading="Subir Imagen">
             <app-image-uploader></app-image-uploader>
         </tab>
     </tabset>

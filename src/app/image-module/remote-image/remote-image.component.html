@@ -1,0 +1,9 @@
+<div class="row">
+  <div class="col element-img-view">
+    <img src="{{valor}}" alt="">
+  </div>
+  <div class="col">
+    <label for="remoteimgeditor" class="col-form-label">Icono: </label>
+    <input id="remoteimgeditor" type="text" class="form-control" (input)="modificado($event)" [value]="valor">
+  </div>
+</div>

@@ -1,0 +1,11 @@
+$tam:8rem;
+
+.element-img-view{
+    max-width: $tam;
+    img{
+        max-width: $tam;
+        max-height: $tam;
+        border-radius: 10px;
+        margin: auto;
+    }
+}

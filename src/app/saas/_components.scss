@@ -166,6 +166,13 @@
     }
   }
 
+  .element-remote-img {
+    img {
+      max-width: 5rem;
+      border-radius: 10px;
+    }
+  }
+
   .element-languaje {
     font-size: 4rem;
     max-width: 5rem;

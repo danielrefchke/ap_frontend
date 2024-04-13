@@ -1,0 +1,10 @@
+.element-img-view {
+  max-width: 8rem;
+}
+
+.element-img-view img {
+  max-width: 8rem;
+  max-height: 8rem;
+  border-radius: 10px;
+  margin: auto;
+}

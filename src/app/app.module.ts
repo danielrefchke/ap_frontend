@@ -26,7 +26,7 @@ import {
 } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { ImagePickerComponent } from './image-module/image-picker/image-picker.component';
+//import { ImagePickerComponent } from './image-module/image-picker/image-picker.component';
 import { IconPickerComponent } from './header-module/icon-picker/icon-picker.component';
 import { ItemTipoEditorComponent } from './content-module/item-tipo-editor/item-tipo-editor.component';
 import { GraphItemEditorComponent } from './content-module/graph-item-editor/graph-item-editor.component';
@@ -35,10 +35,12 @@ import { ConfigEditorComponent } from './header-module/config-editor/config-edit
 import { UserEditorComponent } from './header-module/user-editor/user-editor.component';
 import { IconEditorComponent } from './header-module/icon-editor/icon-editor.component';
 import { ListUserEditorComponent } from './header-module/list-user-editor/list-user-editor.component';
-import { ImageUploaderComponent } from './image-module/image-uploader/image-uploader.component';
+//import { ImageUploaderComponent } from './image-module/image-uploader/image-uploader.component';
 import { HelpComponentComponent } from './header-module/help-component/help-component.component';
 import { SpinerMessageComponent } from './spiner-message/spiner-message.component';
 import { IconItemEditorComponent } from './content-module/icon-item-editor/icon-item-editor.component';
+import {CloudinaryModule} from '@cloudinary/ng';
+import { ImageModuleModule } from './image-module/image-module.module';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,7 @@ import { IconItemEditorComponent } from './content-module/icon-item-editor/icon-
     SeccionEditorComponent,
     ItemActionComponent,
     AgregadorItemSeccionComponent,
-    ImagePickerComponent,
+  //  ImagePickerComponent,
     IconPickerComponent,
     ItemTipoEditorComponent,
     GraphItemEditorComponent,
@@ -64,12 +66,13 @@ import { IconItemEditorComponent } from './content-module/icon-item-editor/icon-
     UserEditorComponent,
     IconEditorComponent,
     ListUserEditorComponent,
-    ImageUploaderComponent,
+   // ImageUploaderComponent,
     HelpComponentComponent,
     SpinerMessageComponent,
     IconItemEditorComponent
   ],
   imports: [
+    
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -112,6 +115,8 @@ import { IconItemEditorComponent } from './content-module/icon-item-editor/icon-
     }),
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    CloudinaryModule,
+    ImageModuleModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,10 +1,11 @@
 .element-img-view {
   max-width: 8rem;
+  margin: 5px;
 }
 
 .element-img-view img {
-  max-width: 8rem;
-  max-height: 8rem;
+  max-width: calc($tam - 2rem);
+  max-height: calc($tam - 2rem);
   border-radius: 10px;
   margin: auto;
 }

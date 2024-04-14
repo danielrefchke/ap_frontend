@@ -2,9 +2,10 @@ $tam:8rem;
 
 .element-img-view{
     max-width: $tam;
+    margin: 5px;
     img{
-        max-width: $tam;
-        max-height: $tam;
+        max-width: calc($tam - 2rem);
+        max-height: calc($tam - 2rem);
         border-radius: 10px;
         margin: auto;
     }

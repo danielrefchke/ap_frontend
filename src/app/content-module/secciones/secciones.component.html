@@ -1,13 +1,18 @@
 <section *ngFor="let seccion of secciones" class="{{seccion.className}}">
     <div>
-        <ngx-spinner name="spinnerDrop" bdColor="rgba(112,106,100,0.2)" size="medium" color="#312b1f" type="square-jelly-box"
-            [fullScreen]="true">
+        <ngx-spinner name="spinnerDrop" bdColor="rgba(112,106,100,0.2)" size="medium" color="#312b1f"
+            type="square-jelly-box" [fullScreen]="true">
         </ngx-spinner>
     </div>
     <div class="section-title row">
         <div class="title-text col">
             <h2>{{seccion.nombre}}
                 <i *ngIf="isLogged" class="{{showIcon(seccion.displayMode)}}" aria-hidden="true"></i>
+                &nbsp;&nbsp; <span *ngIf="isLogged && seccion.displayMode == 'element-list-table'">
+                    <i *ngIf="!isPreviewed" class="fa fa-search" aria-hidden="true" (click)="togglePreview()"></i>
+                    <i *ngIf="isPreviewed" class="fa fa-pencil-square-o" aria-hidden="true"
+                        (click)="togglePreview()"></i>
+                </span>
             </h2>
             <div *ngIf="isLogged" class="editcomment" [ngSwitch]="seccion.displayMode">
                 <div *ngSwitchCase="'element-list-table'">
@@ -19,10 +24,11 @@
             </div>
         </div>
         <app-agregador-item-seccion [seccion]="seccion"></app-agregador-item-seccion>
-        
+
     </div>
-    <div class="{{processClass(seccion.displayMode)}}" [cdkDropListData]="seccion.elementos" cdkDropList (cdkDropListDropped)="drop($event)">
-        <app-item [elementos]="seccion.elementos" ></app-item>
+    <div class="{{processClass(seccion.displayMode)}}" [cdkDropListData]="seccion.elementos" cdkDropList
+        (cdkDropListDropped)="drop($event)">
+        <app-item [elementos]="seccion.elementos"></app-item>
     </div>
-    
+
 </section>

@@ -16,6 +16,7 @@ import { Seccion } from '../../class/seccion';
 export class SeccionesComponent extends Autenticated {
   secciones: Collection<Seccion>;
   private fistTime: boolean;
+  private previwew: boolean;
 
   private evt: CdkDragDrop<Collection<Elemento>>;
 
@@ -26,6 +27,7 @@ export class SeccionesComponent extends Autenticated {
   ) {
     super(auth);
     this.fistTime = true;
+    this.previwew = false;
 
     sincro.loaded.subscribe((data) => {
       //this.secciones = this.sincro.Secciones;
@@ -70,7 +72,7 @@ export class SeccionesComponent extends Autenticated {
   }
 
   processClass(cls: string): string {
-    if (cls == "element-list-table" && this.isLogged) {
+    if (cls == "element-list-table" && this.isLogged && !this.previwew) {
       return "element-list";
     }
 
@@ -93,5 +95,13 @@ export class SeccionesComponent extends Autenticated {
     this.spinner.show("spinnerDrop");
 
     this.sincro.sincr(event.container.data);
+  }
+
+  public get isPreviewed():boolean{
+    return this.previwew;
+  }
+
+  public togglePreview():void{
+    this.previwew = !this.previwew;
   }
 }

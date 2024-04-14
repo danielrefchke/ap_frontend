@@ -1,6 +1,7 @@
 .element-icon-view {
   max-width: 8rem;
   min-width: 8rem;
+  margin: 5px;
 }
 
 .element-icon-view i {
